@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻资讯</title>
+    <style>
+        a {
+            outline: none;
+            color: #333333;
+            text-decoration: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #2c7d4c;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            font-weight: bold;
+        }
+
+        .tab.active {
+            background-color: #f0f8f0;
+            border-bottom: 3px solid #2c7d4c;
+            color: #2c7d4c;
+        }
+
+        .tab:hover:not(.active) {
+            background-color: #f9f9f9;
+        }
+
+        news-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .news-item {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .news-item:hover {
+            background-color: #f7f7f7;
+        }
+
+        .news-item .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .news-item .date {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .news-item .description {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 20px;
+            }
+
+            .news-item .title {
+                font-size: 16px;
+            }
+
+            .news-item .description {
+                font-size: 13px;
+            }
+        }
+
+        .news-link {
+            text-decoration: none;
+            /* 去掉超链接默认下划线 */
+            color: inherit;
+            /* 继承父级颜色 */
+            display: block;
+            /* 让整个新闻项可点击 */
+        }
+
+        ul {
+            list-style-type: none;
+            /* 去掉圆点 */
+            padding: 0;
+            /* 取消默认内边距 */
+            margin: 0;
+            /* 取消默认外边距 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>园林废弃物资源化数据平台：构建城市绿色循环新生态</h1>
+            <p>智能驱动・科学配置・低碳未来</p>
+        </header>
+        <div class="tabs">
+            <a href="./首页.html" class="tab" data-tab="home">首页</a>
+            <a href="./管理指南.html" class="tab" data-tab="guide">管理指南</a>
+            <a href="./新闻咨询.html" class="tab active" data-tab="news">新闻资讯</a>
+            <a href="./资源利用.html" class="tab" data-tab="resources">资源利用</a>
+            <a href="./联系我们.html" class="tab" data-tab="contact">联系我们</a>
+            <a href="./智能问答.html" class="tab" data-tab="ai">AI智能问答</a>
+        </div>
+        <ul class="news-list">
+            <li class="news-item">
+                <a href="http://www.xn--fiq77x3m6axrg.xn--fiqs8s/news" class="news-link">
+                    <div class="title">中能装备树木粉碎车提升园林废弃物处理效率</div>
+                    <div class="date">2025-03-15</div>
+                    <div class="description">中能装备树木粉碎车提升园林废弃物处理效率......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://news.qq.com/rain/a/20250307A09WXT00" class="news-link">
+                    <div class="title">合成生物赛道火热，中关村前沿大赛合成生物十强出炉</div>
+                    <div class="date">2025-03-07</div>
+                    <div class="description">基于植物反应器的合成生物学平台、基于工矿业废弃物再生利用的污水吸碳脱氮新材料项目、新型智能分子伴侣材料驱动的大分子药物递送系统……</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://news.qq.com/rain/a/20250302A06O8Q00" class="news-link">
+                    <div class="title">石景山首个“无废工地”通过评审</div>
+                    <div class="date">2025-03-02</div>
+                    <div class="description">近日，石景山区首个“无废工地”项目——中建三局石景山鲁谷项目，通过了“无废工地”中期评审......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="http://www.tsingyangroup.com/?p=9832" class="news-link">
+                    <div class="title">清研集团助力平谷区高效完成第十次园林绿化资源专项调查</div>
+                    <div class="date">2025-02-27</div>
+                    <div class="description">作为首都五个生态涵养发展区之一，平谷区肩负着筑牢生态屏障与推动绿色发展的重要职责......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://news.sina.com.cn/sx/2024-09-14/detail-incpciyk4811953.shtml" class="news-link">
+                    <div class="title">变废为肥！中农创达突破园林废弃物膜堆肥处理技术卡点</div>
+                    <div class="date">2024-09-14</div>
+                    <div class="description">园林废弃物处置一直是困扰园林绿化行业的一项难题，中农创达联合北京市石景山区绿化养护中心攻坚克难......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://yllhj.beijing.gov.cn/sdlh/ylkj/bzgf/202409/t20240918_3893898.shtml" class="news-link">
+                    <div class="title">园林绿化废弃物热解处理技术规范（DB11/T 2287-2024）</div>
+                    <div class="date">2024-08-08</div>
+                    <div class="description">园林绿化废弃物热解处理技术规范（DB11/T 2287-2024）</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://www.bjfu.edu.cn/jxky/c4ce17abd7f348069a1e37bba6d18fe3.htm" class="news-link">
+                    <div class="title">园林绿化废弃物处置利用科学指南发布</div>
+                    <div class="date">2024-05-06</div>
+                    <div class="description">近日，材料学院任学勇副教授主编的《园林绿化废弃物科学处置与资源化利用》书籍在中国林业出版社正式出版......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://www.sohu.com/a/758623221_120678326" class="news-link">
+                    <div class="title">园林绿化废弃物处理有哪些创新技术？</div>
+                    <div class="date">2024-02-19</div>
+                    <div class="description">随着城市化的推进和人们环保意识的增强，园林绿化废弃物处理成为了一个备受关注的话题......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://www.gov.cn/gongbao/2024/issue_11186/202402/content_6934547.html" class="news-link">
+                    <div class="title">国务院办公厅关于加快构建废弃物循环利用体系的意见</div>
+                    <div class="date">2024-02-06</div>
+                    <div class="description">各省、自治区、直辖市人民政府，国务院各部委、......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://www.gov.cn/zhengce/zhengceku/2022-11/07/content_5725223.htm" class="news-link">
+                    <div class="title">住房和城乡建设部办公厅关于开展城市园林绿化垃圾处理和资源化利用试点工作的通知</div>
+                    <div class="date">2022-11-01</div>
+                    <div class="description">各省、自治区住房和城乡建设厅，北京市园林绿化局、城市管理委，天津市城市管理委......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://yllhj.beijing.gov.cn/ztxx/lhysh/st/202309/t20230906_3252687.shtml" class="news-link">
+                    <div class="title">园林废弃物 变废为宝用处大</div>
+                    <div class="date">2023-09-06</div>
+                    <div class="description">园林废弃物是园林植物在生长和养护期间所产生的草坪修剪物、乔灌木修剪物......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://www.bjtzh.gov.cn/lscs/fzx/202307/1668952.shtml" class="news-link">
+                    <div class="title">聚焦“五类”固废废物系统化管理，我区谋划“无废城市”建设工作</div>
+                    <div class="date">2023-08-03</div>
+                    <div class="description">1.聚焦“工业源”，助推产业绿色高质量发展。一是推动现有产业绿色低碳转型......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://yllhj.beijing.gov.cn/zwgk/zwxx/202307/t20230725_3206604.shtml" class="news-link">
+                    <div class="title">北京市西城区形成园林绿化废弃物利用“西城模式”</div>
+                    <div class="date">2023-07-25 </div>
+                    <div class="description">经过多年尝试探索，北京市西城区逐渐形成“政府持续支持引导—园林部门坚持分类处理返哺应用—企业科技创新促进循环利用”.....</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://www.solidwaste.com.cn/news/336075_2.html" class="news-link">
+                    <div class="title">我国园林绿化废弃物资源化处理案例研究与发展建议</div>
+                    <div class="date">2022-06-27</div>
+                    <div class="description">京市园林绿化废弃物的产量大，2019年全市各类公园、林地、绿地、果园等园林绿化废弃物可用资源量约500万t......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://sainteco.com/newsinfo/2592736.html?templateId=523242" class="news-link">
+                    <div class="title">.东郊森林公园园林废弃物资源化处理示范点</div>
+                    <div class="date">2022-03-31</div>
+                    <div class="description">2016年北京市园林绿化局提出园林废弃物禁烧令，同时不断探索园林废弃物资源化利用新方法......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://yllhj.beijing.gov.cn/zwgk/2024nzcwj/2024nqtwj/202406/t20240625_3730021.shtml"
+                    class="news-link">
+                    <div class="title">北京市园林绿化局关于印发北京市园林绿化行业生活垃圾分类工作方案的通知</div>
+                    <div class="date">2020-05-16</div>
+                    <div class="description">为贯彻实施新修订的《北京市生活垃圾管理条例》，按照市生活垃圾分类推进工作指挥部要求......</div>
+                </a>
+            </li>
+            <li class="news-item">
+                <a href="https://csglw.beijing.gov.cn/zwxx/2024zcwj/202405/t20240517_3686291.html" class="news-link">
+                    <div class="title">北京市出台9条措施推进生活垃圾分类</div>
+                    <div class="date"> 2019-12-27</div>
+                    <div class="description">为贯彻落实新修订的《北京市生活垃圾管理条例》，市城市管理委拟定了《北京市生活垃圾分类工作行动方案》......</div>
+                </a>
+            </li>
+        </ul>
+        <!-- <div class="tab active> -->
+    </div>
+</body>
+
+</html>

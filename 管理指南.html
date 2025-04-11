@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>管理指南</title>
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #2c7d4c;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        a {
+            outline: none;
+            color: #333333;
+            text-decoration: none;
+        }
+
+        .tabs_nav {
+            display: flex;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab_nav {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            font-weight: bold;
+        }
+
+        .tab_nav.active {
+            background-color: #f0f8f0;
+            border-bottom: 3px solid #2c7d4c;
+            color: #2c7d4c;
+        }
+
+        .tab_nav:hover:not(.active) {
+            background-color: #f9f9f9;
+        }
+
+        .tabs_container {
+            position: fixed;
+            left: 5px;
+            top: 244px;
+            transform: translateY(-50%);
+            width: calc((100vw - 1400px) / 2);
+        }
+
+
+        .tabs {
+            display: flex;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            font-weight: bold;
+        }
+
+        .tab.active {
+            background-color: #f0f8f0;
+            border-bottom: 3px solid #2c7d4c;
+            color: #2c7d4c;
+        }
+
+        .tab:hover:not(.active) {
+            background-color: #f9f9f9;
+        }
+
+
+        .tabs {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            font-weight: bold;
+        }
+
+        .tab.active {
+            background-color: #f0f8f0;
+            border-bottom: 3px solid #2c7d4c;
+            color: #2c7d4c;
+        }
+
+        .tab:hover:not(.active) {
+            background-color: #f9f9f9;
+        }
+
+        .content {
+            display: none;
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            /* height: 500px; */
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        #map-container {
+            height: 100vh;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        #mapFrame {
+            height: 100vh;
+        }
+
+        .map-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .map-control-btn {
+            padding: 8px 15px;
+            background-color: #2c7d4c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .map-control-btn:hover {
+            background-color: #235f3a;
+        }
+
+        .legend {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+
+        #appp {
+            width: 100%;
+            height: 100%;
+            background-color: red;
+        }
+
+        .legend-color {
+            width: 15px;
+            height: 15px;
+            margin-right: 5px;
+            border-radius: 50%;
+        }
+
+        .legend-colorPink{
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            margin-right: 5px;
+            border-bottom: 15px solid pink;
+        }
+
+        .legend-colorYellow{
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            margin-right: 5px;
+            border-bottom: 15px solid yellow;
+        }
+        .legend-colorOrange{
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            margin-right: 5px;
+            border-bottom: 15px solid orange;
+        }
+
+        .process-flow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .flow-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background-color: #2c7d4c;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+            background-color: #f0f8f0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #2c7d4c;
+        }
+
+        .step-content h3 {
+            margin-bottom: 10px;
+            color: #2c7d4c;
+        }
+
+        .step-content p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .data-form {
+            background-color: #f0f8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background-color: #2c7d4c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #235f3a;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .data-table th {
+            background-color: #f0f8f0;
+            font-weight: bold;
+            color: #2c7d4c;
+        }
+
+        .data-table tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .stat-card .value {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c7d4c;
+        }
+
+        .chart-container {
+            height: 300px;
+            margin-bottom: 30px;
+        }
+
+        .alert {
+            padding: 15px;
+            background-color: #f8d7da;
+            color: #721c24;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            #map-container {
+                height: 350px;
+            }
+        }
+
+        #panel {
+            position: fixed;
+            background-color: white;
+            max-height: 90%;
+            overflow-y: auto;
+            top: 10px;
+            right: 10px;
+            width: 280px;
+        }
+
+        #panel .amap-lib-driving {
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        #collection-order {
+            letter-spacing: 2px;
+            line-height: 35px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>园林废弃物资源化数据平台：构建城市绿色循环新生态</h1>
+            <p>智能驱动・科学配置・低碳未来</p>
+        </header>
+        <div class="tabs_nav">
+            <a href="./首页.html" class="tab_nav" data-tab="home">首页</a>
+            <a href="./管理指南.html" class="tab_nav active" data-tab="guide">管理指南</a>
+            <a href="./新闻咨询.html" class="tab_nav" data-tab="news">新闻资讯</a>
+            <a href="./资源利用.html" class="tab_nav" data-tab="resources">资源利用</a>
+            <a href="./联系我们.html" class="tab_nav" data-tab="contact">联系我们</a>
+            <a href="./智能问答.html" class="tab_nav" data-tab="ai">AI智能问答</a>
+        </div>
+
+        <div class="tabs_container">
+            <div class="tabs">
+                <div class="tab active" data-tab="process">流程图解</div>
+                <div class="tab" data-tab="map">GIS地图可视化</div>
+                <div class="tab" data-tab="analysis">智能分析工具</div>
+                <div class="tab" data-tab="data">资源化数据平台</div>
+            </div>
+        </div>
+
+        <!-- 流程图解内容 -->
+        <div id="process" class="content active">
+            <h2>园林废弃物分类与处理流程</h2>
+            <p>通过科学的分类和处理流程，实现园林废弃物的资源化利用，减少环境污染，创造经济价值。</p>
+            <img style="width: 100%;margin: 30px 0;" src="./20250318151456.png" alt="">
+            <div class="process-flow">
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>监测与评估</h3>
+                        <p>通过遥感和GIS技术对废弃物进行监测、分类和评估.</p>
+                        <!--<p>分类标准：</p>-->
+                        <ul>
+                            <li>遥感监测：利用遥感技术获取园林废弃物的空间分布和数量信息。</li>
+                            <li>NPP估算：根据遥感数据估算植被的净初级生产力，评估植被生长状况和生态价值。</li>
+                            <li>植被分类：将监测到的植被按类型分类，如乔木、灌木、草本等，为后续处理提供依据。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>收集与运输</h3>
+                        <p>废弃物的收集、运输以及动态优化。</p>
+                        <!--<p>堆放点分级：</p>-->
+                        <ul>
+                            <li>GIS地图标注：利用GIS技术将监测和分类结果标注在地图上，展示废弃物分布和处理站点位置。</li>
+                            <li>一级站点收集：将分类后的废弃物运输至配备分类容器、传感器监测和运输预警功能的一级站点。</li>
+                            <li>动态优化：根据实际情况动态优化运输路线等，提高运输效率和降低成本。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>处理与转化</h3>
+                        <p>废弃物的分拣、破碎、压缩以及资源化利用。</p>
+                        <ul>
+                            <li>二级站点处理：对一级站点收集的废弃物进行机械分拣和破碎/压缩处理。</li>
+                            <li>三级站点处理：对二级站点处理后的废弃物进行深度处理，包括覆盖物应用、基质生产、有机肥应用、堆肥工艺、生物质燃料应用和生物质能源等，实现资源化利用。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>监控与更新</h3>
+                        <p>利用物联网和GIS动态更新技术监控整个流程。</p>
+                        <ul>
+                            <li>物联网监控：利用物联网技术实时监控废弃物处理流程的各个环节，确保流程顺利进行和数据准确采集。</li>
+                            <li>GIS动态更新：根据实际处理情况动态更新GIS地图上的信息，反映废弃物的最新分布和处理进度。</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="flow-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>优化与改进</h3>
+                        <p>结合数据反馈不断优化流程，提高效率和效益。</p>
+                        <ul>
+                            <li>结合物联网监控和GIS动态更新的数据，对整个废弃物处理流程进行综合优化，不断改进处理方法和流程，提高资源利用效率和经济效益。</li>
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GIS地图可视化内容 -->
+        <div id="map" class="content">
+            <h2>园林废弃物堆放点</h2>
+            <p>展示园林废弃物堆放点分布情况</p>
+            <!--
+            <div class="map-controls">
+                <button class="map-control-btn" id="show-all">显示全部</button>
+                <button class="map-control-btn" id="show-level2">显示二级点</button>
+                <button class="map-control-btn" id="show-level3">显示三级点</button>
+                <button class="map-control-btn" id="show-facilities">显示处理设施</button>
+                <button class="map-control-btn" id="show-vehicles">显示收集车辆</button>
+            </div>
+            -->
+            <div id="appp" style="width: 100%;height: 900px;">
+
+            </div>
+
+            <div class="legend">
+                <div class="legend-item">
+                    <div class="legend-colorYellow" ></div>
+                    <span>二级点</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-colorPink"></div>
+                    <span>二级点</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-colorOrange"></div>
+                    <span>二级点</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color " style="background-color: cyan;"></div>
+                    <span>三级点</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 智能分析工具内容 -->
+        <div id="analysis" class="content">
+            <h2>园林废弃物智能分析工具</h2>
+            <p>提供路径规划和预警功能，优化收集效率，及时发现异常情况。</p>
+
+            <div class="alert" id="warning-alert">
+                <strong>预警通知：</strong> <span id="warning-message">发现异常数据，请及时处理！</span>
+            </div>
+
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>今日收集总量</h3>
+                    <div class="value">12.5吨</div>
+                </div>
+                <div class="stat-card">
+                    <h3>本周堆肥转化率</h3>
+                    <div class="value">85%</div>
+                </div>
+                <div class="stat-card">
+                    <h3>本月资源回收价值</h3>
+                    <div class="value">¥25,680</div>
+                </div>
+                <div class="stat-card">
+                    <h3>碳减排量</h3>
+                    <div class="value">3.2吨</div>
+                </div>
+            </div>
+
+            <h3>路径规划</h3>
+            <div class="data-form">
+                <div class="form-group">
+                    <label for="start-point">收集点（一级点）</label>
+                    <select id="start-point">
+                        <option value="">请选择起点</option>
+                        <option value="depot1">通州区西门绿洲</option>
+                        <!--<option value="depot2">通州区万达广场B区</option>-->
+                        <option value="depot3">通州区城市绿心森林公园</option>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>中转点（二级点，可多选）</label>
+                    <div>
+                        <input type="checkbox" id="point1" name="points" value="point1">
+                        <label for="point1">通州万达广场</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="point2" name="points" value="point2">
+                        <label for="point2">北京北投爱琴海购物公园</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="point3" name="points" value="point3">
+                        <label for="point3">通州区梨园镇文化广场</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="point4" name="points" value="point4">
+                        <label for="point4">通州区运河文化广场</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="end-facility">处理点（三级点）</label>
+                    <select id="end-facility">
+                        <option value="">请选择终点</option>
+                        <option value="end1">北神树垃圾卫生填埋场</option>
+                        <option value="end2">绿色动力通州项目（垃圾焚烧厂）</option>
+                        <option value="end3">通州区马驹桥生活垃圾填埋场</option>
+                    </select>
+                </div>
+                <button class="btn" id="calculate-route">计算最优路线</button>
+            </div>
+
+            <div id="route-result" style="display: none;">
+                <h3>最优路线结果</h3>
+
+                <div id="container" style="width: 100%;height: 800px;"></div>
+                <div id="panel"></div>
+
+                <div id="route-details">
+                    <p><strong>总路程：</strong> <span id="total-distance">15.2公里</span></p>
+                    <p><strong>预计时间：</strong> <span id="total-time">45分钟</span></p>
+                    <p><strong>收集点顺序：</strong> <span id="collection-order">车辆停放点1 → 二级点2 → 二级点1 → 三级点1 → 堆肥厂1</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 资源化数据平台内容 -->
+        <div id="data" class="content">
+            <h2>园林废弃物资源化数据平台</h2>
+            <p>提供废弃物数据录入、查询和分析功能，支持资源化利用决策。</p>
+
+            <div class="alert" id="form-alert">
+                <span id="form-message">数据提交成功！</span>
+            </div>
+
+            <h3>废弃物数据录入</h3>
+            <div class="data-form">
+                <div class="form-group">
+                    <label for="waste-source">来源</label>
+                    <select id="waste-source">
+                        <option value="">请选择来源</option>
+                        <option value="park1">北区公园</option>
+                        <option value="park2">东湖绿地</option>
+                        <option value="park3">西山林场</option>
+                        <option value="street1">城市道路绿化带</option>
+                        <option value="other">其他</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="waste-type">废弃物类型</label>
+                    <select id="waste-type">
+                        <option value="">请选择类型</option>
+                        <option value="leaves">落叶</option>
+                        <option value="branches">树枝</option>
+                        <option value="grass">草屑</option>
+                        <option value="wood">木材</option>
+                        <option value="special">特殊处理物</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="waste-quantity">数量（公斤）</label>
+                    <input type="number" id="waste-quantity" min="0" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="collection-date">收集日期</label>
+                    <input type="date" id="collection-date">
+                </div>
+                <div class="form-group">
+                    <label for="waste-notes">备注</label>
+                    <textarea id="waste-notes" placeholder="请输入其他相关信息..."></textarea>
+                </div>
+                <button class="btn" id="submit-data">提交数据</button>
+                <button class="btn" id="batch-import"
+                    style="margin-left: 10px; background-color: #607d8b;">批量导入</button>
+            </div>
+            <!--
+            <h3>废弃物转化数据</h3>
+            <div class="chart-container" id="conversion-chart"></div>
+            -->
+            <h3>最近录入数据</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>来源</th>
+                        <th>类型</th>
+                        <th>数量(kg)</th>
+                        <th>收集日期</th>
+                        <th>处理状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>北区公园</td>
+                        <td>落叶</td>
+                        <td>250</td>
+                        <td>2025-03-12</td>
+                        <td>已处理</td>
+                    </tr>
+                    <tr>
+                        <td>东湖绿地</td>
+                        <td>树枝</td>
+                        <td>320</td>
+                        <td>2025-03-12</td>
+                        <td>运输中</td>
+                    </tr>
+                    <tr>
+                        <td>西山林场</td>
+                        <td>木材</td>
+                        <td>450</td>
+                        <td>2025-03-11</td>
+                        <td>已处理</td>
+                    </tr>
+                    <tr>
+                        <td>城市道路绿化带</td>
+                        <td>草屑</td>
+                        <td>180</td>
+                        <td>2025-03-11</td>
+                        <td>已处理</td>
+                    </tr>
+                    <tr>
+                        <td>北区公园</td>
+                        <td>特殊处理物</td>
+                        <td>75</td>
+                        <td>2025-03-10</td>
+                        <td>待处理</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        window._AMapSecurityConfig = {
+            securityJsCode: '69eebd1c25777fdda8c52d120bde595e',
+        }
+    </script>
+    <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+    <script type="text/javascript"
+        src="http://webapi.amap.com/maps?v=1.4.15&key=d9305eec9c03b30a5619663d2587bbcb&plugin=AMap.Driving"></script>
+    <script type="text/javascript" src="http://cache.amap.com/lbs/static/addToolbar.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        let mapInitialized = false;
+
+        // 选项卡切换功能
+        document.addEventListener('DOMContentLoaded', async function () {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+
+                    // 移除所有活动状态
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.classList.remove('active'));
+
+                    // 添加当前活动状态
+                    tab.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+
+                    // 如果切换到地图标签，初始化地图
+                    if (tabId === 'map' && !mapInitialized) {
+                        initMap();
+                    }
+
+                    // 如果切换到数据平台，初始化图表
+                    if (tabId === 'data' && !chartInitialized) {
+                        initChart();
+                    }
+                });
+            });
+
+            // 模拟数据提交
+            const submitBtn = document.getElementById('submit-data');
+            const formAlert = document.getElementById('form-alert');
+            const formMessage = document.getElementById('form-message');
+
+            if (submitBtn) {
+                submitBtn.addEventListener('click', function () {
+                    const source = document.getElementById('waste-source').value;
+                    const type = document.getElementById('waste-type').value;
+                    const quantity = document.getElementById('waste-quantity').value;
+                    const date = document.getElementById('collection-date').value;
+
+                    if (!source || !type || !quantity || !date) {
+                        formAlert.classList.remove('alert-success');
+                        formMessage.textContent = '请填写完整信息！';
+                        formAlert.classList.add('show');
+
+                        setTimeout(() => {
+                            formAlert.classList.remove('show');
+                        }, 3000);
+
+                        return;
+                    }
+
+                    // 模拟数据提交成功
+                    formAlert.classList.add('alert-success');
+                    formMessage.textContent = '数据提交成功！';
+                    formAlert.classList.add('show');
+
+                    setTimeout(() => {
+                        formAlert.classList.remove('show');
+
+                        // 清空表单
+                        document.getElementById('waste-source').value = '';
+                        document.getElementById('waste-type').value = '';
+                        document.getElementById('waste-quantity').value = '';
+                        document.getElementById('collection-date').value = '';
+                        document.getElementById('waste-notes').value = '';
+
+                        // 添加到表格（实际应用中应该是从服务器获取最新数据）
+                        const table = document.querySelector('.data-table tbody');
+                        const newRow = table.insertRow(0);
+
+                        const sourceCell = newRow.insertCell(0);
+                        const typeCell = newRow.insertCell(1);
+                        const quantityCell = newRow.insertCell(2);
+                        const dateCell = newRow.insertCell(3);
+                        const statusCell = newRow.insertCell(4);
+
+                        sourceCell.textContent = document.querySelector(`#waste-source option[value="${source}"]`).textContent;
+                        typeCell.textContent = document.querySelector(`#waste-type option[value="${type}"]`).textContent;
+                        quantityCell.textContent = quantity;
+                        dateCell.textContent = date;
+                        statusCell.textContent = '待处理';
+
+                        // 更新图表数据
+                        if (wasteConversionChart) {
+                            updateChartData(wasteConversionChart, type, quantity);
+                        }
+                    }, 2000);
+                });
+            }
+
+            // 路径规划功能
+            const calculateRouteBtn = document.getElementById('calculate-route');
+            const routeResult = document.getElementById('route-result');
+
+            if (calculateRouteBtn) {
+                calculateRouteBtn.addEventListener('click', async function () {
+                    const startPoint = document.getElementById('start-point').value;
+                    const endFacility = document.getElementById('end-facility').value;
+                    const selectedPoints = document.querySelectorAll('input[name="points"]:checked');
+                    selectedPoints.forEach((item) => {
+                        console.log(item.value)
+                    })
+                    if (!startPoint || !endFacility || selectedPoints.length === 0) {
+                        alert('请选择起点、终点和至少一个收集点！');
+                        return;
+                    }
+
+                    let points = {
+                        depot1: { name: "通州区西门绿洲", lnglat: new AMap.LngLat(116.663843, 39.912345) },
+                        <!--depot2: { name: "通州区万达广场B区", lnglat: new AMap.LngLat(116.668912, 39.908765) },-->
+                        depot3: { name: "通州区城市绿心森林公园", lnglat: new AMap.LngLat(116.712345, 39.876543) },
+                    };
+
+                    let end = {
+                        end1: { name: "北神树垃圾卫生填埋场", lnglat: new AMap.LngLat(116.623456, 39.845678) },
+                        end2: { name: "绿色动力通州项目（垃圾焚烧厂）", lnglat: new AMap.LngLat(116.678912, 39.890123) },
+                        end3: { name: "通州区马驹桥生活垃圾填埋场", lnglat: new AMap.LngLat(116.645678, 39.876543) },
+                    };
+
+                    let selectPointList = {
+                        point1: { name: "通州万达广场", lnglat: [116.65716, 39.90966] },
+                        point2: { name: "北京北投爱琴海购物公园", lnglat: [116.6459648, 39.83096097] },
+                        point3: { name: "通州区梨园镇文化广场", lnglat: [116.654321, 39.890123] },
+                        point4: { name: "通州区运河文化广场", lnglat: [116.678912, 39.902345] },
+                    }
+                    let selectPont = []
+                    selectedPoints.forEach((item) => {
+                        selectPont.push(selectPointList[item.value].lnglat)
+                    })
+                    let optionPot = points[startPoint].lnglat
+                    let endPot = end[endFacility].lnglat
+                    routeResult.style.display = 'block';
+                    let info = await initMapRoute(optionPot, endPot, selectPont)
+                    console.log('info is', info)
+                    document.getElementById('total-distance').textContent = info.distance + '公里';
+                    document.getElementById('total-time').textContent = info.time + '分钟';
+
+                    let collectionOrder = document.getElementById('start-point').options[document.getElementById('start-point').selectedIndex].text;
+
+                    selectedPoints.forEach(point => {
+                        collectionOrder += ' → ' + document.querySelector(`label[for="${point.id}"]`).textContent;
+                    });
+
+                    info.steps.forEach((step, index) => {
+                        if (index === 0) {
+                            collectionOrder += ' → ' + step.instruction;
+                        } else {
+                            collectionOrder += ' → ' + step.instruction;
+                        }
+                    });
+
+                    collectionOrder += ' → ' + document.getElementById('end-facility').options[document.getElementById('end-facility').selectedIndex].text;
+
+                    document.getElementById('collection-order').textContent = collectionOrder;
+
+
+                });
+            }
+
+            // 预警功能模拟
+            const warningAlert = document.getElementById('warning-alert');
+            const warningMessage = document.getElementById('warning-message');
+
+            // 模拟随机预警
+            setTimeout(() => {
+                const warnings = [
+                    '北区公园二级点废弃物堆积量已超过90%，请及时处理！',
+                    '东湖绿地特殊处理物检测到异常，请派专业人员处理！',
+                    '收集车辆3号已超过24小时未返回，请检查状态！'
+                ];
+
+                const randomWarning = warnings[Math.floor(Math.random() * warnings.length)];
+                warningMessage.textContent = randomWarning;
+                warningAlert.classList.add('show');
+            }, 5000);
+        });
+
+
+
+        // 图表相关变量和函数
+        let wasteConversionChart = null;
+        let chartInitialized = false;
+
+        function initChart() {
+            const ctx = document.getElementById('conversion-chart').getContext('2d');
+
+            wasteConversionChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['落叶', '树枝', '草屑', '木材', '特殊处理物'],
+                    datasets: [
+                        {
+                            label: '收集量(吨)',
+                            data: [12, 8, 5, 7, 2],
+                            backgroundColor: 'rgba(44, 125, 76, 0.7)',
+                            borderColor: 'rgba(44, 125, 76, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '转化产品(吨)',
+                            data: [10, 6, 4, 5, 0],
+                            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        },
+                        {
+                            label: '经济价值(千元)',
+                            data: [8, 12, 3, 10, 0],
+                            backgroundColor: 'rgba(255, 159, 64, 0.7)',
+                            borderColor: 'rgba(255, 159, 64, 1)',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            chartInitialized = true;
+        }
+
+        function updateChartData(chart, type, quantity) {
+            const typeIndex = {
+                'leaves': 0,
+                'branches': 1,
+                'grass': 2,
+                'wood': 3,
+                'special': 4
+            };
+
+            const index = typeIndex[type];
+            if (index !== undefined) {
+                // 更新收集量
+                chart.data.datasets[0].data[index] += parseFloat(quantity) / 1000; // 转换为吨
+
+                // 更新转化产品量（假设80%的转化率）
+                chart.data.datasets[1].data[index] += parseFloat(quantity) * 0.8 / 1000;
+
+                // 更新经济价值（根据不同类型有不同的价值）
+                const valueFactors = [0.8, 1.5, 0.6, 1.4, 0]; // 每吨千元价值
+                chart.data.datasets[2].data[index] += parseFloat(quantity) * valueFactors[index] / 1000;
+
+                chart.update();
+            }
+        }
+
+        function searchWaste() {
+            let query = document.getElementById("search").value.toLowerCase();
+            let wasteData = {
+                "常绿乔木": { weight: 634.45, location: "116.4,39.9" },
+                "低矮植株": { weight: 725.33, location: "116.5,39.8" },
+                "落叶灌木": { weight: 647.24, location: "116.3,39.85" },
+                "落叶乔木": { weight: 688.64, location: "116.45,39.87" }
+            };
+
+            if (wasteData[query]) {
+                let position = wasteData[query].location;
+                document.getElementById("mapFrame").src = `https://uri.amap.com/marker?position=${position}`;
+                alert(`已定位 ${query} 的废弃物，重量：${wasteData[query].weight} 吨`);
+            } else {
+                alert("未找到相关废弃物信息");
+            }
+        }
+
+        function initMap() {
+            console.log('执行')
+            // 初始化地图，设置显示通州区区域
+            var map = new AMap.Map('appp', {
+                zoom: 11,
+                center: [116.65, 39.9]
+            });
+
+            // 二级点坐标
+            var secondLevelPoints = [
+                [116.648, 40.0026],
+                [116.64, 40.0202],
+                [116.654, 39.9215],
+                [116.631, 39.9174],
+                [116.733, 39.8779],
+                [116.758, 39.8532],
+                [116.625, 39.8631],
+                [116.685, 39.9226],
+                [116.778, 39.5957],
+                [116.57, 39.812],
+                [116.544, 39.7454],
+                [116.796, 39.7065],
+                [116.777, 39.6237],
+                [116.777, 39.6237]
+            ];
+
+            // 三级点坐标
+            var thirdLevelPoints = [
+                [116.733, 39.6551],
+                [116.68, 39.9311]
+            ];
+
+            // 一级点（凉水河公园）
+            var firstLevelPoint = [116.64, 39.88];
+
+            // 方形轮廓（通州区域）
+            var bounds = [
+                [116.5, 39.7],
+                [116.8, 40.1]
+            ];
+            var rectangle = new AMap.Rectangle({
+                bounds: new AMap.Bounds(bounds[0], bounds[1]),
+                strokeColor: '#FF33FF',
+                strokeWeight: 2,
+                fillOpacity: 0.1,
+                fillColor: '#FF9900'
+            });
+            rectangle.setMap(map);
+
+            // 生成图标函数
+            function createIcon(shape, color) {
+                let svg;
+                switch (shape) {
+                    case 'circle':
+                        svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="50" fill="${color}"/></svg>`;
+                        break;
+                    case 'triangle':
+                        svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,0 100,100 0,100" fill="${color}"/></svg>`;
+                        break;
+                    case 'star':
+                        svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><polygon points="50,0 61,35 98,35 68,57 79,91 50,70 21,91 32,57 2,35 39,35" fill="${color}"/></svg>`;
+                        break;
+                    default:
+                        svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="0" y="0" width="100" height="100" fill="${color}"/></svg>`;
+                }
+                return new AMap.Icon({
+                    size: new AMap.Size(20, 20),
+                    image: 'data:image/svg+xml;utf8,' + encodeURIComponent(svg),
+                    imageSize: new AMap.Size(20, 20)
+                });
+            }
+
+            // 定义二级点和三级点的图标样式
+            const secondLevelIcons = [
+                createIcon('triangle', 'yellow'),
+                createIcon('triangle', 'orange'),
+                createIcon('triangle', 'pink')
+            ];
+            const thirdLevelIcons = [
+                createIcon('circle', 'cyan'),
+                //createIcon('triangle', 'cyan'),
+                //createIcon('star', 'purple')
+            ];
+
+            // 添加二级点
+            secondLevelPoints.forEach((point, index) => {
+                const icon = secondLevelIcons[index % secondLevelIcons.length];
+                const marker = new AMap.Marker({
+                    position: point,
+                    icon: icon
+                });
+                marker.setMap(map);
+            });
+
+            // 添加三级点
+            thirdLevelPoints.forEach((point, index) => {
+                const icon = thirdLevelIcons[index % thirdLevelIcons.length];
+                const marker = new AMap.Marker({
+                    position: point,
+                    icon: icon
+                });
+                marker.setMap(map);
+            });
+
+            // 添加一级点（凉水河公园）
+            var firstLevelMarker = new AMap.Marker({
+                position: firstLevelPoint,
+                title: '凉水河公园'
+            });
+            firstLevelMarker.setMap(map);
+
+            // 距离计算示例（到达指定标记点总和最近的算法）
+            function calculateTotalDistance(fromPoint, toPoints) {
+                var totalDistance = 0;
+                toPoints.forEach(function (toPoint) {
+                    totalDistance += AMap.GeometryUtil.distance(fromPoint, toPoint);
+                });
+                return totalDistance;
+            }
+
+            // 示例：计算某个点到所有二级点的总距离
+            var testPoint = [116.65, 39.9];
+            var totalDistanceToSecondLevel = calculateTotalDistance(testPoint, secondLevelPoints);
+        }
+
+        async function initMapRoute(start, endPot, waypoints) {
+            return new Promise((resolve, reject) => {
+                var map = new AMap.Map("container", {
+                    resizeEnable: true,
+                    center: [116.397428, 39.90923],
+                    zoom: 13
+                });
+
+                var driving = new AMap.Driving({
+                    map: map,
+                    panel: "panel"
+                });
+
+                driving.search(
+                    start,
+                    endPot,
+                    {
+                        waypoints: waypoints.map(function (point) {
+                            return new AMap.LngLat(point[0], point[1]);
+                        })
+                    },
+                    function (status, result) {
+                        if (status === 'complete') {
+                            console.log('路径规划成功');
+
+                            var routes = result.routes;
+                            if (routes && routes.length > 0) {
+                                var shortestRoute = routes[0];
+                                for (var i = 1; i < routes.length; i++) {
+                                    if (routes[i].distance < shortestRoute.distance) {
+                                        shortestRoute = routes[i];
+                                    }
+                                }
+
+                                var distance = shortestRoute.distance;
+                                var time = shortestRoute.time;
+                                var steps = shortestRoute.steps;
+                                console.log(time)
+                                var path = [];
+                                steps.forEach(function (step) {
+                                    path = path.concat(step.path);
+                                });
+
+                                resolve({
+                                    distance: (distance / 1000).toFixed(2),
+                                    time: (time / 60).toFixed(2),
+                                    steps: steps,
+                                    path: path
+                                });
+                            } else {
+                                reject('未找到有效路线');
+                            }
+                        } else {
+                            reject('获取驾车数据失败：', result);
+                        }
+                    }
+                );
+            });
+        }
+
+    </script>
+</body>
+
+</html>

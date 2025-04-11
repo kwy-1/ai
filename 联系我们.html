@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系我们</title>
+    <style>
+        :root {
+            --primary: #2d9a6e;
+            /* 主品牌色 */
+            --secondary: #3ab77d;
+            /* 辅助色 */
+            --accent: #f1c40f;
+            /* 强调色 */
+            --text: #34495e;
+            /* 正文颜色 */
+            --border: #e0e6ed;
+            /* 边框颜色 */
+        }
+
+        
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 页眉优化 */
+        header {
+            background-color: #2c7d4c;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* 表单容器布局 */
+        .form-container {
+            /* display: flex;
+            justify-content: space-between; */
+            
+        }
+
+        /* 表单卡片设计 */
+        .form-card {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1.75rem;
+            border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+        }
+
+        /* 表单标题样式 */
+        .form-title {
+            color: var(--text);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            position: relative;
+   
+
+        }
+
+        .form-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        /* 表单元素优化 */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+            font-size: 0.95rem;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.2s;
+   
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(var(--primary), 0.1);
+            outline: none;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* 按钮设计升级 */
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .submit-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent 25%,
+                    rgba(255, 255, 255, 0.1) 50%,
+                    transparent 75%);
+            transform: rotate(45deg);
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shine {
+            100% {
+                transform: translateX(100%) rotate(45deg);
+            }
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(var(--primary), 0.2);
+        }
+
+        /* 成功提示优化 */
+        .success-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #e8f5e9;
+            color: #2d9a6e;
+            border-radius: 0.5rem;
+            border: 2px solid #c3e6cb;
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            font-weight: bold;
+        }
+
+        .tab.active {
+            background-color: #f0f8f0;
+            border-bottom: 3px solid #2c7d4c;
+            color: #2c7d4c;
+        }
+
+        .tab:hover:not(.active) {
+            background-color: #f9f9f9;
+        }
+
+        a {
+            outline: none;
+            color: #333333;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>园林废弃物资源化数据平台：构建城市绿色循环新生态</h1>
+            <p>智能驱动・科学配置・低碳未来</p>
+        </header>
+
+        <div class="tabs">
+            <a href="./首页.html" class="tab" data-tab="home">首页</a>
+            <a href="./管理指南.html" class="tab" data-tab="guide">管理指南</a>
+            <a href="./新闻咨询.html" class="tab" data-tab="news">新闻资讯</a>
+            <a href="./资源利用.html" class="tab" data-tab="resources">资源利用</a>
+            <a href="./联系我们.html" class="tab active" data-tab="contact">联系我们</a>
+            <a href="./智能问答.html" class="tab" data-tab="ai">AI智能问答</a>
+        </div>
+
+        <div class="form-container">
+            <!-- 用户反馈表单 -->
+            <div class="form-card">
+                <h2 class="form-title">用户反馈</h2>
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="category">反馈类别</label>
+                        <select id="category" name="category" required>
+                            <option value="">请选择类别</option>
+                            <option value="data-error">数据错误</option>
+                            <option value="feature-request">功能建议</option>
+                            <option value="bug-report">系统故障</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">问题描述</label>
+                        <textarea id="description" name="description" placeholder="请详细描述您的问题或建议..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">提交反馈</button>
+                </form>
+                <div id="feedbackSuccessMessage" class="success-message">✓ 反馈已成功提交！</div>
+            </div>
+
+            <!-- 废弃物申报表单 -->
+            <div class="form-card">
+                <h2 class="form-title">废弃物申报</h2>
+                <form id="declarationForm">
+                    <div class="form-group">
+                        <label for="company">绿化单位名称</label>
+                        <input type="text" id="company" name="company" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="contact">联系人</label>
+                        <input type="text" id="contact" name="contact" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">联系电话</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="wasteType">废弃物类型</label>
+                        <select id="wasteType" name="wasteType" required>
+                            <option value="tree-branches">树枝</option>
+                            <option value="fallen-leaves">落叶</option>
+                            <option value="grass-clippings">草屑</option>
+                            <option value="other">其他</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn">提交申请</button>
+                </form>
+                <div id="declarationSuccessMessage" class="success-message">✓ 申报已成功提交！</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 表单交互增强
+        const setupForm = (formId, successId) => {
+            const form = document.getElementById(formId);
+            const success = document.getElementById(successId);
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                success.style.display = 'block';
+                form.reset();
+                setTimeout(() => success.style.display = 'none', 3000);
+            });
+        }
+
+        setupForm('feedbackForm', 'feedbackSuccessMessage');
+        setupForm('declarationForm', 'declarationSuccessMessage');
+    </script>
+</body>
+
+</html>

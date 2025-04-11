@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        a{
+            outline: none;
+            color: #333333;
+            text-decoration: none;
+        }
+
+        header {
+            background-color: #2c7d4c;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            font-weight: bold;
+        }
+
+        .tab.active {
+            background-color: #f0f8f0;
+            border-bottom: 3px solid #2c7d4c;
+            color: #2c7d4c;
+        }
+
+        .tab:hover:not(.active) {
+            background-color: #f9f9f9;
+        }
+
+        
+        .content_box {
+            padding: 1rem 5%;
+            background: #f8f9fa;
+            margin-bottom: 20px;
+        }
+
+        .content_box h2 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .content_box h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
+        }
+
+        news-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .news-item {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .news-item:hover {
+            background-color: #f7f7f7;
+        }
+
+        .news-item .title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .news-item .date {
+            font-size: 14px;
+            color: #888;
+            margin-top: 5px;
+        }
+
+        .news-item .description {
+            font-size: 14px;
+            color: #555;
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            header h1 {
+                font-size: 20px;
+            }
+
+            .news-item .title {
+                font-size: 16px;
+            }
+
+            .news-item .description {
+                font-size: 13px;
+            }
+        }
+
+        .news-link {
+            text-decoration: none;
+            /* 去掉超链接默认下划线 */
+            color: inherit;
+            /* 继承父级颜色 */
+            display: block;
+            /* 让整个新闻项可点击 */
+        }
+
+        ul {
+            list-style-type: none;
+            /* 去掉圆点 */
+            padding: 0;
+            /* 取消默认内边距 */
+            margin: 0;
+            /* 取消默认外边距 */
+        }
+        .content {
+            /* display: none; */
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 1200px;
+            box-sizing: border-box;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 2rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery img:hover {
+            transform: translateY(-5px);
+        }
+        .content-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .column {
+            width: 30%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+        .problem {
+            background-color: #ddd;
+        }
+        .solution {
+            background-color: #d4edda;
+        }
+        .middle {
+            width: 30%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .arrow {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .left-arrow {
+            left: -60px;
+        }
+        .right-arrow {
+            right: -60px;
+        }
+        /* img {
+            max-width: 80%;
+            height: auto;
+            margin-bottom: 10px;
+        } */
+        .title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .method-section {
+            padding: 30px;
+        }
+
+        .method-title {
+            font-size: 24px;
+            color: #2c7d4c;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .method-item {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 40px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .method-image {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .method-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .method-content {
+            flex: 1;
+        }
+
+        .method-content h3 {
+            color: #2c7d4c;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .method-subtitle {
+            color: #666;
+            font-size: 16px;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .method-content p {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .method-content ul {
+            padding-left: 20px;
+        }
+
+        .method-content li {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .method-content strong {
+            color: #2c7d4c;
+        }
+
+        .concept-section {
+            padding: 30px;
+            text-align: center;
+        }
+
+        .concept-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+        }
+
+        .center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: 300px;
+            background-color: #90EE90;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+            font-weight: bold;
+            font-size: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .concept-items {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .concept-item {
+            position: absolute;
+            background-color: #FF6B6B;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .concept-item.top-left {
+            top: 30%;
+            left: -4%;
+            transform: translate(-15%, -30%);
+        }
+
+        .concept-item.top-right {
+            top: 30%;
+            right: -4%;
+            transform: translate(15%, -30%);
+        }
+
+        .concept-item.bottom-left {
+            bottom: 30%;
+            left: -4%;
+            transform: translate(-15%, 30%);
+        }
+
+        .concept-item.bottom-right {
+            bottom: 30%;
+            right: -4%;
+            transform: translate(15%, 30%);
+        }
+
+        .concept-description {
+            max-width: 800px;
+            margin: 30px auto 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #2c7d4c;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .concept-description p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.6;
+            margin: 0;
+            text-align: left;
+        }
+
+        .background-section {
+            margin: 30px 0;
+            padding: 25px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            color: #2c7d4c;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            padding-left: 15px;
+            border-left: 4px solid #2c7d4c;
+        }
+
+        .section-content {
+            color: #666;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .section-content p {
+            margin-bottom: 15px;
+            text-indent: 2em;  /* 首行缩进 */
+        }
+
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <h1>园林废弃物资源化数据平台：构建城市绿色循环新生态</h1>
+            <p>智能驱动・科学配置・低碳未来</p>
+        </header>
+        <div class="tabs">
+            <a href="./首页.html" class="tab active" data-tab="home" >首页</a>
+            <a href="./管理指南.html" class="tab" data-tab="guide">管理指南</a>
+            <a href="./新闻咨询.html" class="tab" data-tab="news">新闻资讯</a>
+            <a href="./资源利用.html" class="tab" data-tab="resources">资源利用</a>
+            <a href="./联系我们.html" class="tab" data-tab="contact">联系我们</a>
+            <a href="./智能问答.html" class="tab" data-tab="ai">AI智能问答</a>
+        </div>
+        <!-- <div class="content_box">
+            <h2>园林废弃物分类与处理流程管理系统</h2>
+            <p>精细化管理·资源化利用·智能化分析</p>
+        </div> -->
+        <div id="process" class="content active">
+           <img src="./1.png" alt="园林废弃物分类与处理流程管理系统" style="width: 100%;">
+            <!-- <div class="gallery">
+                <img src="waste1.jpg" alt="废弃物展示1">
+                <img src="waste2.jpg" alt="废弃物展示2">
+                <img src="waste3.jpg" alt="废弃物展示3">
+                <img src="waste4.jpg" alt="废弃物展示4">
+            </div> -->
+            <div class="background-section">
+                <h2 class="section-title">背景与目标</h2>
+                <div class="section-content">
+                    <p>党的二十大报告指出，大自然是人类赖以生存发展的基本条件。随着城市化进程加快，园林绿化废弃物产生量逐年攀升，传统填埋或焚烧方式不仅占用土地资源，还会造成二次污染。</p>
+                    <p>本项目聚焦北京通州区园林废弃物的资源化利用，旨在搭建一个多源数据驱动的智慧管理平台，实现废弃物从收集、运输到处理的全程优化配置，推动绿色循环经济发展。</p>
+                    <p>通过融合遥感技术、机器学习与空间优化算法，平台将提供精准的废弃物量预测、处理站点选址建议及资源化路径规划，助力城市生态治理精细化。</p>
+                </div>
+            </div>
+        </div>
+        <div class="content-container">
+            <!-- 左栏(问题) -->
+            <div class="column problem">
+                <div class="title">🌫 传统焚烧污染</div>
+                <p>枯枝落叶</p>
+                <p>堆积的枯枝落叶 + 灰色烟雾</p>
+            </div>
+    
+            <!-- 过渡中间(GIS地图+算法流程图) -->
+            <div class="middle">
+                <div class="title">📊 数据平台</div>
+                <p>GIS 地图</p>
+                <img class="arrow left-arrow" src="https://cdn-icons-png.flaticon.com/512/271/271226.png" alt="左箭头">
+                <img class="arrow right-arrow" src="https://cdn-icons-png.flaticon.com/512/271/271228.png" alt="右箭头">
+                <p>资源化路径</p>
+            </div>
+    
+            <!-- 右栏(解决方案) -->
+            <div class="column solution">
+                <div class="title">🌱 绿色能源</div>
+                 <p>生物质燃料</p>
+                <p>有机肥生产线 + 绿色能源（生物质燃料）</p>
+            </div>
+        </div>
+        <div class="content" style="margin-top: 20px;">
+            <div class="method-section">
+                <h2 class="method-title">核心方法</h2>
+                
+                <!-- 第一个方法：数据融合与分析 -->
+                <div class="method-item">
+                    <div class="method-content">
+                        <h3>1. 数据融合与分析</h3>
+                        <div class="method-subtitle">"从枯枝落叶到绿色黄金，数据赋能城市新生"</div>
+                        <p>利用CASA模型估算植被净初级生产力（NPP），结合机器学习算法（如随机森林）分类植被类型，精准预测园林废弃物产生量。整合GIS空间数据，分析通州区土地利用、交通网络及人口分布，优化收集与运输路径。</p>
+                    </div>
+                    <div class="method-image">
+                        <img src="./map.jpg" alt="NPP分布图">
+                    </div>
+                </div>
+
+                <!-- 第二个方法：智能选址与多级处理 -->
+                <div class="method-item">
+                    <div class="method-content">
+                        <h3>2. 智能选址与多级处理</h3>
+                        <div class="method-subtitle">"智慧选址·循环再生，让每一片落叶都有归宿"</div>
+                        <p>基于遗传算法设计三级处理站点：</p>
+                        <ul>
+                            <li><strong>一级点（公园）：</strong>就近收集落叶、修剪枝叶等废弃物。</li>
+                            <li><strong>二级点（交通枢纽附近）：</strong>集中初筛与预处理。综合考虑各候选区域的位置分布、交通主干道和河流的位置等因素。同时在绿地数量较多、道路较为密集的地带多建立二级点。在居民活动范围较大的区域减少二级点位的建立。</li>
+                            <li><strong>三级点（郊区集中处理厂）：</strong>规模化生产有机肥、生物质燃料等资源化产品。这些点位均远离密集居民活动区域，以减少对周边环境和居民生活的影响。同时，这些点位也具备良好的交通条件和基础设施支持，能够确保园林废弃物的高效、安全处理。</li>
+                        </ul>
+                    </div>
+                    <div class="method-image">
+                        <img src="./map4.png" alt="处理站点分布图">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content" style="margin-top: 20px;">
+            <div class="concept-section">
+                <h2 class="method-title">核心理念</h2>
+                <div class="concept-container">
+                    <div class="center-circle">
+                        <span>绿色循环经济</span>
+                    </div>
+                    <div class="concept-items">
+                        <div class="concept-item top-left">数据驱动决策</div>
+                        <div class="concept-item top-right">多级协同处理</div>
+                        <div class="concept-item bottom-left">技术融合创新</div>
+                        <div class="concept-item bottom-right">社区共建共治</div>
+                    </div>
+                </div>
+                <!-- <div class="concept-description">
+                    <p>综合废弃物类型（如落叶乔木、低矮植株）匹配处理工艺，发挥处理资源利用率。</p>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
